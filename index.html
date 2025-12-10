@@ -1,19 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project 4 · Diffusion Models Overview</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Diffusion Models · Project 4 Summary</title>
     <style>
       :root {
-        color-scheme: light;
-        --bg: #f4f6fb;
-        --card: #ffffff;
-        --text: #1a1d24;
-        --muted: #60697a;
-        --accent: #5865f2;
-        --accent-light: rgba(88, 101, 242, 0.12);
-        --border: rgba(17, 24, 39, 0.08);
+        --bg: #f8f8f6;
+        --ink: #1d1f23;
+        --muted: #5b616e;
+        --line: #e3e3dd;
+        --accent: #0055aa;
       }
 
       * {
@@ -23,297 +20,241 @@
       }
 
       body {
-        font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        font-family: "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
         background: var(--bg);
-        color: var(--text);
+        color: var(--ink);
         line-height: 1.6;
-        padding: 32px 16px 80px;
+        padding: 40px 20px 64px;
       }
 
-      .shell {
+      .page {
         max-width: 1100px;
         margin: 0 auto;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 48px clamp(24px, 5vw, 72px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
       }
 
-      header {
-        background: linear-gradient(120deg, #1f1c2c, #403b8c, #5865f2);
-        color: white;
-        border-radius: 28px;
-        padding: 48px;
-        box-shadow: 0 24px 60px rgba(31, 28, 44, 0.34);
-        margin-bottom: 32px;
-      }
-
-      header h1 {
+      h1 {
         font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 700;
+        letter-spacing: -0.02em;
       }
 
       header p {
         margin-top: 12px;
-        color: rgba(255, 255, 255, 0.85);
-        font-size: 1.05rem;
-      }
-
-      header .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 20px;
-      }
-
-      header .tags span {
-        background: rgba(255, 255, 255, 0.12);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 999px;
-        padding: 8px 16px;
-        font-size: 0.9rem;
-        backdrop-filter: blur(6px);
+        color: var(--muted);
       }
 
       section {
-        background: var(--card);
-        border-radius: 22px;
-        padding: 32px;
-        margin-bottom: 24px;
-        border: 1px solid var(--border);
-        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+        margin-top: 48px;
       }
 
       h2 {
-        font-size: 1.35rem;
-        margin-bottom: 20px;
+        font-size: 1.3rem;
+        letter-spacing: 0.02em;
+        margin-bottom: 12px;
       }
 
-      p {
+      .summary {
+        border-left: 3px solid var(--accent);
+        padding-left: 18px;
         color: var(--muted);
-        font-size: 1rem;
       }
 
       .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
       }
 
-      .card {
-        background: var(--accent-light);
-        border-radius: 20px;
-        padding: 22px;
-        border: 1px solid rgba(88, 101, 242, 0.2);
+      .stat {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px;
       }
 
-      .card strong {
-        display: block;
+      .stat strong {
         font-size: 2rem;
         color: var(--accent);
-      }
-
-      .timeline {
-        display: grid;
-        gap: 18px;
-      }
-
-      .timeline-item {
-        display: grid;
-        grid-template-columns: 110px 1fr;
-        gap: 16px;
-        align-items: baseline;
-      }
-
-      .bubble {
-        background: #0e1117;
-        color: #f7f9fc;
-        padding: 8px 12px;
-        border-radius: 999px;
-        font-size: 0.85rem;
-        text-align: center;
+        display: block;
       }
 
       ul {
         list-style: none;
-        display: grid;
-        gap: 12px;
-        margin-top: 12px;
         color: var(--muted);
       }
 
       ul li {
-        padding-left: 26px;
-        position: relative;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
       }
 
-      ul li::before {
-        content: "•";
-        color: var(--accent);
-        position: absolute;
-        left: 8px;
-        font-size: 1.6rem;
-        line-height: 1;
+      .timeline {
+        border-left: 2px solid var(--line);
+        margin-top: 12px;
+      }
+
+      .stage {
+        margin-left: 24px;
+        padding: 16px 0;
+      }
+
+      .stage h3 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+
+      .gallery figure {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fafafa;
+      }
+
+      .gallery img {
+        width: 100%;
+        display: block;
+      }
+
+      .gallery figcaption {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        color: var(--muted);
       }
 
       .links {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
-        margin-top: 20px;
+        margin-top: 16px;
       }
 
       .links a {
         text-decoration: none;
-        color: white;
-        background: var(--text);
-        padding: 12px 18px;
-        border-radius: 14px;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        padding: 10px 16px;
+        border-radius: 999px;
         font-weight: 500;
-        transition: transform 0.2s ease;
-      }
-
-      .links a:hover {
-        transform: translateY(-2px);
-      }
-
-      @media (max-width: 720px) {
-        header {
-          padding: 32px;
-        }
-        section {
-          padding: 24px;
-        }
-        .timeline-item {
-          grid-template-columns: 1fr;
-        }
-        .bubble {
-          width: fit-content;
-        }
       }
     </style>
   </head>
   <body>
-    <div class="shell">
+    <main class="page">
       <header>
-        <h1>Project 4 · Diffusion Models</h1>
+        <h1>Diffusion Models · Project 4 Summary</h1>
         <p>
-          Hands-on exploration of forward diffusion, classical vs. learned
-          denoising, classifier-free guidance, and creative image-to-image
-          editing with DeepFloyd IF. All experiments share the same random seed
-          (<code>180</code>) to keep outputs traceable.
+          Forward diffusion, classical filtering, neural denoisers, classifier‑free guidance, and
+          SDEdit experiments executed with DeepFloyd IF. All image experiments share
+          <code>torch.manual_seed(180)</code> for reproducibility.
         </p>
-        <div class="tags">
-          <span>PyTorch · Diffusers</span>
-          <span>DeepFloyd IF</span>
-          <span>Gaussian & CFG Denoising</span>
-          <span>Text-to-Image + SDEdit</span>
-        </div>
       </header>
 
       <section>
-        <h2>Project Snapshot</h2>
+        <h2>Quick numbers</h2>
         <div class="grid">
-          <div class="card">
+          <div class="stat">
             <strong>3</strong>
-            base prompts sampled in Part 0, each rendered at 64 → 256 px using
-            two inference step counts.
+            base prompts rendered in Part 0 using two inference-step budgets plus commentary.
           </div>
-          <div class="card">
+          <div class="stat">
             <strong>5</strong>
-            CFG-guided generations for “a high quality photo” (γ = 7) to compare
-            conditional vs. unconditional noise.
+            CFG samples at γ = 7 comparing conditioned vs. unconditional noise predictions.
           </div>
-          <div class="card">
+          <div class="stat">
             <strong>6</strong>
-            noise levels revisited during SDEdit (1…20) to reveal how edits fade
-            back to the original image.
+            SDEdit starting indices (1 … 20) per image to illustrate edit strength.
           </div>
-          <div class="card">
+          <div class="stat">
             <strong>2</strong>
-            custom photos (campanile, sea scene) reused across forward diffusion,
-            iterative denoising, and editing pipelines.
+            custom assets (campanile, sea) reused across denoising and editing loops.
           </div>
         </div>
       </section>
 
       <section>
-        <h2>Data & Resources</h2>
-        <p>
-          All experiments rely on the shared prompt embedding dictionary
-          (<code>prompt_embeds_dict.pth</code>) to avoid reloading the heavy T5
-          encoder. The canonical test asset is <code>campanile.jpg</code>, while
-          <code>dz.png</code> and <code>Sea images.png</code> provide additional
-          content for SDEdit. Stage 1 runs at 64 × 64, Stage 2 upsamples to
-          256 × 256, both in FP16 for memory efficiency.
-        </p>
-      </section>
-
-      <section>
-        <h2>What’s Done</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="bubble">Part 0</div>
-            <div>
-              <strong>Model bring-up & prompt sampling</strong>
-              <ul>
-                <li>Authenticated to Hugging Face and loaded both DeepFloyd stages in FP16.</li>
-                <li>Generated each provided prompt twice (short/long inference schedules) and compared fidelity.</li>
-                <li>Recorded the global seed (180) to reuse across every subsequent cell.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="bubble">Part 1</div>
-            <div>
-              <strong>Forward / reverse diffusion study</strong>
-              <ul>
-                <li>Implemented the analytical forward process and visualized noise growth at t = 250/500/750.</li>
-                <li>Benchmarked Gaussian blur vs. stage‑1 UNet denoising to highlight classical vs. learned behavior.</li>
-                <li>Built a strided timetable (990 → 0) and iterative denoiser capable of single-step and multi-step reconstructions.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="bubble">Part 2</div>
-            <div>
-              <strong>Sampling, CFG, & SDEdit</strong>
-              <ul>
-                <li>Sampled five random seeds via <code>iterative_denoise</code> to validate unconditional generation.</li>
-                <li>Added classifier-free guidance with an empty prompt branch to boost detail at γ = 7.</li>
-                <li>Applied SDEdit to the campanile and two personal photos at noise levels {1,3,5,7,10,20}.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2>Key Takeaways</h2>
-        <ul>
-          <li>
-            Small inference-step changes in Part 0 already alter texture sharpness, underscoring the compute/quality trade-off.
-          </li>
-          <li>
-            Gaussian filtering removes high-frequency noise but destroys structure, while the UNet reconstruction keeps global geometry even at t = 750.
-          </li>
-          <li>
-            CFG produces noticeably richer lighting and edges at γ = 7, albeit with reduced diversity, matching the expected theory.
-          </li>
-          <li>
-            SDEdit lets us dial in the edit strength: low i_start keeps the original subject, high i_start induces drastic hallucinations.
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Detailed Outputs</h2>
-        <p>
-          Explore the full notebook renders or the condensed PDF-style summaries
-          below. Both exports include inline figures for every experiment.
+        <h2>Data & resources</h2>
+        <p class="summary">
+          Model weights: DeepFloyd IF stage 1/2 (FP16). Prompt embeddings cached in
+          <code>prompt_embeds_dict.pth</code> to skip loading the large T5 encoder. Test imagery:
+          <code>campanile.jpg</code> plus personal <code>dz.png</code> and <code>Sea images.png</code>.
         </p>
         <div class="links">
-          <a href="Project_4.html">📘 Full HTML Report</a>
-          <a href="Project_4_Summary.html">📝 Executive Summary</a>
-          <a href="Project_4 (3).py">💻 Cleaned Notebook Script</a>
+          <a href="Project_4.html">Full HTML export</a>
+          <a href="Project_4_Summary.html">Condensed summary</a>
+          <a href="Project_4 (3).py">Notebook script</a>
         </div>
       </section>
-    </div>
+
+      <section>
+        <h2>Work completed</h2>
+        <div class="timeline">
+          <div class="stage">
+            <h3>Part 0 · model bring-up</h3>
+            <ul>
+              <li>Authenticated to Hugging Face, loaded both IF stages in FP16.</li>
+              <li>Sampled three prompts at two inference-step counts and recorded observations.</li>
+              <li>Captured the global seed (180) used everywhere else.</li>
+            </ul>
+          </div>
+          <div class="stage">
+            <h3>Part 1 · forward & reverse processes</h3>
+            <ul>
+              <li>Implemented the analytical forward process and visualized noise growth at t={250,500,750}.</li>
+              <li>Compared Gaussian blur vs. stage‑1 UNet on the same noisy images.</li>
+              <li>Created a 990→0 stride‑30 timetable and iterative denoiser (multi-step + single-step baselines).</li>
+            </ul>
+          </div>
+          <div class="stage">
+            <h3>Part 2 · sampling, CFG, SDEdit</h3>
+            <ul>
+              <li>Generated five unconditional samples via <code>iterative_denoise</code>.</li>
+              <li>Added classifier-free guidance using empty prompt embeddings, γ = 7.</li>
+              <li>Applied SDEdit to the campanile and two custom photos at starting indices {1,3,5,7,10,20}.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Image highlights</h2>
+        <p class="summary">
+          The gallery samples are written to <code>/images</code> during notebook export. Below are
+          representative outputs from Part 0 (prompt sampling), Part 1 (forward/denoise), and Part 2 (CFG + SDEdit).
+        </p>
+        <div class="gallery">
+          <figure>
+            <img src="images/image_000.png" alt="Prompt sampling comparison" />
+            <figcaption>Part 0 · stage 2 render (longer vs. shorter inference steps).</figcaption>
+          </figure>
+          <figure>
+            <img src="images/image_002.png" alt="Forward diffusion noise levels" />
+            <figcaption>Part 1.1 · Noise accumulation at t = 250/500/750 on campanile.jpg.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/image_004.png" alt="Iterative denoising progression" />
+            <figcaption>Part 1.4 · Iterative denoise vs. one-step vs. Gaussian blur.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/image_006.png" alt="CFG sampling results" />
+            <figcaption>Part 2.2 · Classifier-free guidance (γ = 7) “a high quality photo”.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/image_007.png" alt="SDEdit series" />
+            <figcaption>Part 2.3 · SDEdit edits for custom sea photo at different noise starts.</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
