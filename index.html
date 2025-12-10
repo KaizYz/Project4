@@ -189,11 +189,11 @@
           <code>prompt_embeds_dict.pth</code> to skip loading the large T5 encoder. Test imagery:
           <code>campanile.jpg</code> plus personal <code>dz.png</code> and <code>Sea images.png</code>.
         </p>
-        <div class="links">
-          <a href="Project_4.html">Full HTML export</a>
-          <a href="Project_4_Summary.html">Condensed summary</a>
-          <a href="Project_4 (3).py">Notebook script</a>
-        </div>
+        <p style="margin-top:18px;font-size:0.95rem;color:var(--muted);">
+          Reference artefacts: full HTML export (<code>Project_4.html</code>), condensed write-up
+          (<code>Project_4_Summary.html</code>), and cleaned notebook script
+          (<code>Project_4 (3).py</code>).
+        </p>
       </section>
 
       <section>
@@ -235,6 +235,11 @@
         </p>
 
         <h3 style="margin-top:24px">Part 0 · prompt sampling</h3>
+        <p class="summary" style="margin-bottom:18px;">
+          Objective: validate DeepFloyd IF with the supplied prompts, study the effect of
+          <code>num_inference_steps</code>, and document qualitative differences prior to the analytical
+          tasks.
+        </p>
         <div class="gallery">
           <figure>
             <img src="images/image_000.png" alt="Stage 2 prompt comparison" />
@@ -246,6 +251,11 @@
         </div>
 
         <h3 style="margin-top:28px">Part 1 · forward and reverse processes</h3>
+        <p class="summary" style="margin-bottom:18px;">
+          Objective: implement the closed-form forward process, evaluate classical Gaussian filtering,
+          design an iterative denoiser, and compare it against single-step UNet inversion on the same
+          noisy samples.
+        </p>
         <div class="gallery">
           <figure>
             <img src="images/image_002.png" alt="Forward diffusion noise ladder" />
@@ -264,6 +274,11 @@
         </div>
 
         <h3 style="margin-top:28px">Part 2 · sampling, CFG, SDEdit</h3>
+        <p class="summary" style="margin-bottom:18px;">
+          Objective: start from pure noise to produce unconditional samples, add classifier-free
+          guidance to strengthen conditional paths, and apply SDEdit to quantify edit strength as a
+          function of the starting index.
+        </p>
         <div class="gallery">
           <figure>
             <img src="images/image_006.png" alt="CFG sampling at gamma 7" />
