@@ -227,31 +227,57 @@
       </section>
 
       <section>
-        <h2>Image highlights</h2>
+        <h2>Visual evidence by part</h2>
         <p class="summary">
-          The gallery samples are written to <code>/images</code> during notebook export. Below are
-          representative outputs from Part 0 (prompt sampling), Part 1 (forward/denoise), and Part 2 (CFG + SDEdit).
+          Each figure references assets saved under <code>/images</code>. Captions emphasise the empirical
+          observation that motivated the corresponding write-up in the report, giving the page a more
+          academic narrative flow.
         </p>
+
+        <h3 style="margin-top:24px">Part 0 · prompt sampling</h3>
         <div class="gallery">
           <figure>
-            <img src="images/image_000.png" alt="Prompt sampling comparison" />
-            <figcaption>Part 0 · stage 2 render (longer vs. shorter inference steps).</figcaption>
+            <img src="images/image_000.png" alt="Stage 2 prompt comparison" />
+            <figcaption>
+              Stage 2 synthesis of the three provided prompts. Note how increasing <code>num_inference_steps</code>
+              raises global sharpness yet adds diminishing detail beyond ~30 steps.
+            </figcaption>
+          </figure>
+        </div>
+
+        <h3 style="margin-top:28px">Part 1 · forward and reverse processes</h3>
+        <div class="gallery">
+          <figure>
+            <img src="images/image_002.png" alt="Forward diffusion noise ladder" />
+            <figcaption>
+              Forward diffusion at t = 250/500/750 on campanile.jpg, visualising the scaling by
+              <code>√ᾱ<sub>t</sub></code> and <code>√(1-ᾱ<sub>t</sub>)</code>.
+            </figcaption>
           </figure>
           <figure>
-            <img src="images/image_002.png" alt="Forward diffusion noise levels" />
-            <figcaption>Part 1.1 · Noise accumulation at t = 250/500/750 on campanile.jpg.</figcaption>
+            <img src="images/image_004.png" alt="Iterative vs single-step denoise" />
+            <figcaption>
+              Iterative denoise (stride 30) compared with single-step inversion and Gaussian blur,
+              highlighting the benefit of gradual refinement.
+            </figcaption>
+          </figure>
+        </div>
+
+        <h3 style="margin-top:28px">Part 2 · sampling, CFG, SDEdit</h3>
+        <div class="gallery">
+          <figure>
+            <img src="images/image_006.png" alt="CFG sampling at gamma 7" />
+            <figcaption>
+              CFG samples at γ = 7. The strengthened conditional branch yields higher contrast and
+              semantic coherence relative to the unconditional baseline.
+            </figcaption>
           </figure>
           <figure>
-            <img src="images/image_004.png" alt="Iterative denoising progression" />
-            <figcaption>Part 1.4 · Iterative denoise vs. one-step vs. Gaussian blur.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/image_006.png" alt="CFG sampling results" />
-            <figcaption>Part 2.2 · Classifier-free guidance (γ = 7) “a high quality photo”.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/image_007.png" alt="SDEdit series" />
-            <figcaption>Part 2.3 · SDEdit edits for custom sea photo at different noise starts.</figcaption>
+            <img src="images/image_007.png" alt="SDEdit progression" />
+            <figcaption>
+              SDEdit edits for the sea photograph. Larger starting indices induce increasingly
+              creative hallucinations before converging back to the original manifold.
+            </figcaption>
           </figure>
         </div>
       </section>
